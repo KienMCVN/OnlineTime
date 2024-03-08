@@ -3,12 +3,12 @@ main: KienMC\OnlTime\Main
 api: 5.0.0
 version: 0.0.1
 author:
-- Kiên MC
+- KienDev
 github: https://github.com/KienMCVN/
 description: Plugin OnlineTime Code By Kiên MC
 commands:
    onlinetime:
-      description: "Watch Top Online"
+      description: "See Top Online"
       permission: onlinetime.cmd
       aliases: ["toponline","toponl","onltime"]
 permissions:
