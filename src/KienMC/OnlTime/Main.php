@@ -85,41 +85,41 @@ class Main extends PluginBase implements Listener{
 		return $time;
 	}
 	
-	public function getHourTime($player): ?int{
+	public function getHourTime($player): ?float{
 		if(!$this->time->exists($player)) return null;
 		$data=$this->time->get($player);
 		$h=floor($data/3600);
 		return $h;
 	}
 	
-	public function getMinTime($player): ?int{
+	public function getMinTime($player): ?float{
 		if(!$this->time->exists($player)) return null;
 		$data=$this->time->get($player);
 		$m=floor($data/60);
 		return $m;
 	}
 	
-	 public function getSecTime($player): ?int{
+	 public function getSecTime($player): ?float{
 		if(!$this->time->exists($player)) return null;
 		$data=$this->time->get($player);
 		return $data;
 	}
 	
 	public function setTime($player, $data){
-		if(!this->time->exists($player)) return;
+		if(!$this->time->exists($player)) return;
 		$this->time->set($player, (int)($data));
 		$this->time->save();
 	}
 	
 	public function giveTime($player, $data){
-		if(!this->time->exists($player)) return;
+		if(!$this->time->exists($player)) return;
 		$data=(int)($this->time->get($player))+(int)($data);
 		$this->time->set($player, (int)($data));
 		$this->time->save();
 	}
 	
 	public function takeTime($player, $data){
-		if(!this->time->exists($player)) return;
+		if(!$this->time->exists($player)) return;
 		$data=(int)($this->time->get($player))-(int)($data);
 		$this->time->set($player, (int)($data));
 		$this->time->save();
@@ -147,6 +147,7 @@ class Main extends PluginBase implements Listener{
 		$end=min($begin+$pperpage-1, count($all));
 		$msg="";
 		$i=1;
+		$top="Not Found";
 		foreach($all as $name => $data){
 			if($i>=$begin && $i<=$end){
 				$time=$this->getTime($name);
@@ -155,7 +156,7 @@ class Main extends PluginBase implements Listener{
 				$s=$time[2];
 				$msg.=" §l§c➥§b Top ".$i.": §e".$name." §c➵§a ".$h."§e h §a".$m."§e m §a".$s."§e s\n";
 			}
-			if($name==$player->getName()) $xh=$i;
+			if($name==$player->getName()) $top=$i;
 			++$i;
 		}
 		$form=new CustomForm(function(Player $player, $data) use($totalpage){
@@ -169,7 +170,7 @@ class Main extends PluginBase implements Listener{
 		$m=$time[1];
 		$s=$time[2];
 		$form->setTitle("§l§c♦§6 Top Online Time §c♦");
-		$form->addLabel("§l§c•§e Your Online Time:§a ".$h."§e h §a".$m."§e m §a".$s."§e s\n§l§c•§e Your Top:§a ".$xh."\n\n§l§c•§e Top:\n$msg \n\n§l§c•§e Page: §a".$page."/".$totalpage);
+		$form->addLabel("§l§c•§e Your Online Time:§a ".$h."§e h §a".$m."§e m §a".$s."§e s\n§l§c•§e Your Top:§a ".$top."\n\n§l§c•§e Top:\n$msg \n\n§l§c•§e Page: §a".$page."/".$totalpage);
 		$form->addInput("\n§l§c•§e Enter Page You Want To Go:");
 		$form->sendToPlayer($player);
 	}
