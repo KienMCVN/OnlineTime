@@ -5,4 +5,5 @@ branches:
 projects:
   OnlineTime:
     path: ""
+    icon: clock.png
 ...
