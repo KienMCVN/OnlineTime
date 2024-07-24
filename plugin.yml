@@ -5,7 +5,8 @@ version: 0.0.1
 author:
 - KienDev
 github: https://github.com/KienMCVN/
-description: Plugin OnlineTime Code By Kiên MC
+description: Plugin OnlineTime Code By KienDev
+virions: ["FormAPI"]
 commands:
    onlinetime:
       description: "See Top Online"
